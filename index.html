@@ -11,65 +11,149 @@
         padding: 0;
     }
     
-    .msg {
-        width: 300px;
-        margin: 100px;
+    body {
+        font: 12px/19px Arial, Helvetica, sans-serif;
+        color: #666;
     }
     
-    .msg_caption {
-        width: 100%;
-        overflow: hidden;
-        margin-bottom: 1px;
+    .tab {
+        width: 240px;
+        margin: 50px;
     }
     
-    .msg_caption span {
-        display: block;
+    .tab_menu {
+        clear: both;
+    }
+    
+    .tab_menu li {
         float: left;
-        margin: 0 2px;
-        padding: 4px 10px;
-        background: #898989;
+        text-align: center;
         cursor: pointer;
-        font-size: 12px;
-        color: white;
+        list-style: none;
+        padding: 1px 6px;
+        margin-right: 4px;
+        background: #F1F1F1;
+        border: 1px solid #898989;
+        border-bottom: none;
     }
     
-    .msg textarea {
-        width: 300px;
-        height: 80px;
+    .tab_menu li.hover {
+        background: #DFDFDF;
+    }
+    
+    .tab_menu li.selected {
+        color: #FFF;
+        background: #6D84B4;
+    }
+    
+    .tab_box {
+        clear: both;
+        border: 1px solid #898989;
         height: 100px;
-        border: 1px solid #000;
+    }
+    
+    .hide {
+        display: none
+    }
+    
+    .tab_box span {
+        height: 20px;
+        line-height: 20px;
+        padding-left: 5px;
     }
     </style>
     <script type="text/javascript">
     $(function() {
-        $("span").click(function() {
-            var thisEle = $("#para").css("font-size");
-            var textFontSize = parseInt(thisEle, 10);
-            var unit = thisEle.slice(-2);
-            var cName = $(this).attr("class");
-            if (cName == "bigger") {
-                if (textFontSize <= 22)
-                    textFontSize += 2;
-            } else if (cName == "smaller") {
-                if (textFontSize >= 12)
-                    textFontSize -= 2;
-            }
-            $("#para").css("font-size", textFontSize + unit);
+        var $div_li = $("div.tab_menu ul li");
+        $div_li.click(function() {
+            $(this).addClass("selected") //当前<li>元素高亮
+                .siblings().removeClass("selected"); //去掉其它同辈<li>元素的高亮
+            var index = $div_li.index(this);
+            $("div.tab_box>div")
+                .eq(index).show()
+                .siblings().hide();
+        }).hover(function(){
+            $(this).addClass("hover");
+        },function(){
+            $(this).removeClass("hover");
         });
+
     });
     </script>
 </head>
 
 <body>
-    <div class="msg">
-        <div class="msg_caption">
-            <span class="bigger">放大</span>
-            <span class="smaller">缩小</span>
+    <div class="tab">
+        <div class="tab_menu">
+            <ul>
+                <li class="selected">时事</li>
+                <li>体育</li>
+                <li>娱乐</li>
+                <li>军事</li>
+                <li>时尚</li>
+            </ul>
         </div>
-        <div>
-            <p id="para">
-                This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-            </p>
+        <div class="tab_box">
+            <div>
+                <span>这是一条时事新闻</span><span>这是一条时事新闻</span>
+                <br/>
+                <span>这是一条时事新闻</span><span>这是一条时事新闻</span>
+                <br/>
+                <span>这是一条时事新闻</span><span>这是一条时事新闻</span>
+                <br/>
+                <span>这是一条时事新闻</span><span>这是一条时事新闻</span>
+                <br/>
+                <span>这是一条时事新闻</span><span>这是一条时事新闻</span>
+                <br/>
+            </div>
+            <div class="hide">
+                <span>这是一条体育新闻</span><span>这是一条体育新闻</span>
+                <br/>
+                <span>这是一条体育新闻</span><span>这是一条体育新闻</span>
+                <br/>
+                <span>这是一条体育新闻</span><span>这是一条体育新闻</span>
+                <br/>
+                <span>这是一条体育新闻</span><span>这是一条体育新闻</span>
+                <br/>
+                <span>这是一条体育新闻</span><span>这是一条体育新闻</span>
+                <br/>
+            </div>
+            <div class="hide">
+                <span>这是一条娱乐新闻</span><span>这是一条娱乐新闻</span>
+                <br/>
+                <span>这是一条娱乐新闻</span><span>这是一条娱乐新闻</span>
+                <br/>
+                <span>这是一条娱乐新闻</span><span>这是一条娱乐新闻</span>
+                <br/>
+                <span>这是一条娱乐新闻</span><span>这是一条娱乐新闻</span>
+                <br/>
+                <span>这是一条娱乐新闻</span><span>这是一条娱乐新闻</span>
+                <br/>
+            </div>
+            <div class="hide">
+                <span>这是一条军事新闻</span><span>这是一条军事新闻</span>
+                <br/>
+                <span>这是一条军事新闻</span><span>这是一条军事新闻</span>
+                <br/>
+                <span>这是一条军事新闻</span><span>这是一条军事新闻</span>
+                <br/>
+                <span>这是一条军事新闻</span><span>这是一条军事新闻</span>
+                <br/>
+                <span>这是一条军事新闻</span><span>这是一条军事新闻</span>
+                <br/>
+            </div>
+            <div class="hide">
+                <span>这是一条时尚新闻</span><span>这是一条时尚新闻</span>
+                <br/>
+                <span>这是一条时尚新闻</span><span>这是一条时尚新闻</span>
+                <br/>
+                <span>这是一条时尚新闻</span><span>这是一条时尚新闻</span>
+                <br/>
+                <span>这是一条时尚新闻</span><span>这是一条时尚新闻</span>
+                <br/>
+                <span>这是一条时尚新闻</span><span>这是一条时尚新闻</span>
+                <br/>
+            </div>
         </div>
     </div>
 </body>
